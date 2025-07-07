@@ -5,7 +5,7 @@ import '../models/user.dart';
 
 class AuthService {
   // Atributo que representa el URL base del backend
-  final String baseURL = 'http://172.31.99.23:3000/api'; // IP local (localhost)
+  final String baseURL = 'http://192.168.1.175:3000/api'; // IP local (localhost)
 
   // Método registro de usuarios
   Future<bool> register(User user) async {

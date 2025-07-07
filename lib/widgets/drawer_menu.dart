@@ -17,7 +17,7 @@ class DrawerMenu extends StatelessWidget {
           const DrawerHeader(child: Text("Menú")),
           ListTile(
             title: const Text("Registrar producto"),
-            onTap: () => Navigator.pushNamed(context, "/"),
+            onTap: () => Navigator.pushNamed(context, "/products/create"),
           ),
           ListTile(
             title: const Text("Editar producto"),

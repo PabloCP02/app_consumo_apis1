@@ -5,7 +5,7 @@ import '../models/product.dart';
 
 class ProductService {
   // Atributo que representa el URL base del backend
-  final String baseURL = "http://172.31.99.23:3000/api";
+  final String baseURL = "http://192.168.1.175:3000/api";
 
   // Método para consumir la API que obtiene la lista de productos
   Future<List<Product>> getProducts() async {
@@ -53,8 +53,39 @@ class ProductService {
         "quantity": quantity,
       }),
     );
-    
+
     // Comparar si se accedio correctamente y se obtuvo respuesta favorable
     return response.statusCode == 200 || response.statusCode == 201;
   }
+
+  // Método para editar un producto
+  Future<bool> updateProduct({
+    required int id,
+    required String code,
+    required String description,
+    required double price,
+    required int quantity,
+  }) async{
+    // Obtener el tokem
+    final prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString("token");
+
+    // Consumir la API de edición de un produtco
+    final response = await http.patch(
+      Uri.parse("$baseURL/product/$id"),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",
+      },
+      body: jsonEncode({
+        "code": code,
+        "description": description,
+        "price": price,
+        "quantity": quantity,
+      }),
+    );
+
+    // Retornar true o false si se ejecuto correctamente o no
+    return response.statusCode == 200;
+  } 
 }
